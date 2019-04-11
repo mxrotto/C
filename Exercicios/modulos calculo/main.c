@@ -26,6 +26,9 @@ float calcu(char simbol[], int n, int n2){
 	else if(simbol[0] == '+'){
 		return (soma(n, n2));
 	}
+	else if(simbol[0] == '%'){
+		return (mod(n, n2));
+	}
 	else
 		printf("Escolha incorreta");
 			return(0);
@@ -34,7 +37,7 @@ float calcu(char simbol[], int n, int n2){
 int main() {
 	char simb[1];
 	int num, num2;
-	printf("operacao disponivel: / + - *\n");
+	printf("operacao disponivel: / + - * %%\n");
 	printf("Escolha entre uma delas:");
 	gets(simb);
 	printf("informe o primeiro numero:");
