@@ -4,6 +4,8 @@
 #include "sub.c"
 #include "vezes.c"
 #include "soma.c"
+#include "mod.c"
+
 
 float calcu(char simbol[], int n, int n2){
 	float result;
