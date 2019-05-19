@@ -11,13 +11,13 @@
 #include <stdlib.h>
 
 
-#define TRUE		10										//<- 						
-#define FALSE		5										//<- "codigos" de verificacao				
-#define FULL		15										//<-  valores sem significado real	
+#define TRUE		10				//<- 						
+#define FALSE		5				//<- "codigos" de verificacao				
+#define FULL		15				//<-  valores sem significado real	
 
-#define size		3										//Tamanho da fila
+#define size		3				//Tamanho da fila
 
-void menu() {												//menu
+void menu() {						//menu
 	system("@cls||clear"	);
 	printf("---------------Lista Circular---------------\n");
 	printf("1 - Inserir\n"	);
@@ -27,11 +27,11 @@ void menu() {												//menu
 }
 
 int verif(int inicio, int fim, int opc, int overlap){		//Funcao de verificacao
-	int response = FALSE;									//<- escolhesse um teste e a variavel 'response' fica em cargo de retornar uma reposta  
-	if (opc == 1){											//Sub-rotina de verificacao inserir()
-		if (fim == size)									//Se fim eh igual a tamanho maximo, entao
-			response = FULL;								//<- A fila esta cheia
-		if(overlap == TRUE){								//Caso o fim ja tenha recibido o valor 0
+	int response = FALSE;					//<- escolhesse um teste e a variavel 'response' fica em cargo de retornar uma reposta  
+	if (opc == 1){						//Sub-rotina de verificacao inserir()
+		if (fim == size)				//Se fim eh igual a tamanho maximo, entao
+			response = FULL;			//<- A fila esta cheia
+		if(overlap == TRUE){				//Caso o fim ja tenha recibido o valor 0
 			if (fim == inicio)								//E ele seja semelhante a fim, entao
 				response = FULL;							//<- A fila esta cheia
 		}
