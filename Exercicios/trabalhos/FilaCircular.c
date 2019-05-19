@@ -115,7 +115,7 @@ int main() {
 	int *begin = &inicio, *end = &fim, *overlap = &over;	//Declaracao e inicializacao dos ponteiros
 	while (!EXIT_SUCCESS){
 		menu();
-		printf("Posicoes: incio:%d - fim:%d\n", inicio, fim);
+		//printf("Posicoes: incio:%d - fim:%d\n", inicio, fim);
 		printf("escolha:");
 		scanf_s("%d", &opc);
 		if (opc == 1)
