@@ -17,7 +17,7 @@
 
 #define size		3				//Tamanho da fila
 
-void menu() {						//menu
+void menu() {							//menu
 	system("@cls||clear"	);
 	printf("---------------Lista Circular---------------\n");
 	printf("1 - Inserir\n"	);
@@ -53,48 +53,48 @@ int verif(int inicio, int fim, int opc, int overlap){		//Funcao de verificacao
 }
 
 void inserir(int inicio, int *fim, int fila[], int *overlap) {	//Funcao inserir
-	if (verif(inicio, *fim, 3, 0) == TRUE) {				//Sub-rotina de verificacao reinicializacao do fim
-		(*fim) = 0;											//<- Fim reiniciado
-		(*overlap) = TRUE;									//Fim agora se encontra antes da variavel inicio
+	if (verif(inicio, *fim, 3, 0) == TRUE) {		//Sub-rotina de verificacao reinicializacao do fim
+		(*fim) = 0;					//<- Fim reiniciado
+		(*overlap) = TRUE;				//Fim agora se encontra antes da variavel inicio
 	}
-	if (verif(inicio, *fim, 1, *overlap) != FULL){			//Sub-rotina de verificacao inserir()
+	if (verif(inicio, *fim, 1, *overlap) != FULL){		//Sub-rotina de verificacao inserir()
 		system("@cls||clear");									
 		printf("Valor:");
 		scanf_s("%d", &fila[*fim]);
-		(*fim)++;											//<- O avance do indice fim
+		(*fim)++;					//<- O avance do indice fim
 	}
-	else{													//Caso a verif() retorne FULL
+	else{							//Caso a verif() retorne FULL
 		printf("\nFila cheia!\n");
 		system("pause");
 	}
 }
 
 void remover(int *inicio, int fim, int fila[], int *overlap){	//Funcao remover
-	if (verif(*inicio, fim, 4, *overlap) == TRUE) {			//Sub-rotina de verificacao reinicializacao do fim
-		(*inicio) = 0;										//<- Inicio reiniciado
-		(*overlap) = FALSE;									//Inicio agora se encontra antes da variavel fim
+	if (verif(*inicio, fim, 4, *overlap) == TRUE) {		//Sub-rotina de verificacao reinicializacao do fim
+		(*inicio) = 0;					//<- Inicio reiniciado
+		(*overlap) = FALSE;				//Inicio agora se encontra antes da variavel fim
 	}
-	if (verif(*inicio, fim, 2, 0) != TRUE) {				//Sub-rotina de verificacao remover()
-		(*inicio)++;										//<- O avance do indice inicio
+	if (verif(*inicio, fim, 2, 0) != TRUE) {		//Sub-rotina de verificacao remover()
+		(*inicio)++;					//<- O avance do indice inicio
 		printf("\nEspaco na lista deletado....\n");
 		system("pause");
 	}
-	else {													//Se verif() retornar TRUE, entao nao ha item para remover
+	else {							//Se verif() retornar TRUE, entao nao ha item para remover
 		printf("\nFila esta vazia!\n");
 		system("pause");
 	}
 }
 
-void listar(int inicio, int fim, int fila[], int overlap) {		//Funcao listar
+void listar(int inicio, int fim, int fila[], int overlap) {	//Funcao listar
 	int i;
-	if (verif(inicio, fim, 2, 0) != TRUE) {					//Sub-rotina de verificacao reinicializacao do fim
+	if (verif(inicio, fim, 2, 0) != TRUE) {			//Sub-rotina de verificacao reinicializacao do fim
 		system("@cls||clear");
-		if (overlap == FALSE) {								//Se inicio se encontra antes da variavel fim
+		if (overlap == FALSE) {				//Se inicio se encontra antes da variavel fim
 			for (i = inicio; i < fim; i++) {
 				printf("Valor:%d\n", fila[i]);
 			}
 		}
-		if (overlap == TRUE) {								//Se fim se encontra antes da variavel inicio
+		if (overlap == TRUE) {				//Se fim se encontra antes da variavel inicio
 			for (i = inicio; i < size; i++) {
 				printf("Valor:%d\n", fila[i]);
 			}
@@ -103,15 +103,15 @@ void listar(int inicio, int fim, int fila[], int overlap) {		//Funcao listar
 			}
 		}
 	}
-	else {													//Se verif() retornar TRUE, entao nao ha item para mostrar
+	else {							//Se verif() retornar TRUE, entao nao ha item para mostrar
 		printf("\nFila esta vazia!\n");
 	}
 	system("pause");
 }
 
 int main() {
-	int opc, fila[size];									//variavel para armazenar a escolha, e um vetor para a lista
-	int inicio = 0,	fim = 0, over = FALSE;					//inicio e fim iniciadas em 0, (over = FALSE) == estado inicial da fila
+	int opc, fila[size];					//variavel para armazenar a escolha, e um vetor para a lista
+	int inicio = 0,	fim = 0, over = FALSE;			//inicio e fim iniciadas em 0, (over = FALSE) == estado inicial da fila
 	int *begin = &inicio, *end = &fim, *overlap = &over;	//Declaracao e inicializacao dos ponteiros
 	while (!EXIT_SUCCESS){
 		menu();
@@ -119,11 +119,11 @@ int main() {
 		printf("escolha:");
 		scanf_s("%d", &opc);
 		if (opc == 1)
-			inserir(inicio, end, fila, overlap);			//Ponteiro de fim (*end) e over (*overlap) pois eles poderam ser modificados
+			inserir(inicio, end, fila, overlap);	//Ponteiro de fim (*end) e over (*overlap) pois eles poderam ser modificados
 		if (opc == 2)
-			remover(begin, fim, fila, overlap);				//Ponteiro de inicio (*begin) e over (*overlap) pois eles poderam ser modificados
+			remover(begin, fim, fila, overlap);	//Ponteiro de inicio (*begin) e over (*overlap) pois eles poderam ser modificados
 		if (opc == 3)
-			listar(inicio, fim, fila, over);				//Nao eh nessecario ponteiros
+			listar(inicio, fim, fila, over);	//Nao eh nessecario ponteiros
 		if (opc == 4)
 			exit(EXIT_SUCCESS);
 	}
