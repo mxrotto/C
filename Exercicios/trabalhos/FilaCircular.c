@@ -23,7 +23,7 @@ void menu() {							//menu
 	printf("1 - Inserir\n"	);
 	printf("2 - Remover\n"	);
 	printf("3 - Listar\n"	);
-	printf("4 - Sair\n"		);
+	printf("4 - Sair\n"	);
 }
 
 int verif(int inicio, int fim, int opc, int overlap){		//Funcao de verificacao
