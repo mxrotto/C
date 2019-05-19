@@ -32,24 +32,24 @@ int verif(int inicio, int fim, int opc, int overlap){		//Funcao de verificacao
 		if (fim == size)				//Se fim eh igual a tamanho maximo, entao
 			response = FULL;			//<- A fila esta cheia
 		if(overlap == TRUE){				//Caso o fim ja tenha recibido o valor 0
-			if (fim == inicio)								//E ele seja semelhante a fim, entao
-				response = FULL;							//<- A fila esta cheia
+			if (fim == inicio)			//E ele seja semelhante a fim, entao
+				response = FULL;		//<- A fila esta cheia
 		}
 	}
-	if (opc == 2){											//Sub-rotina de verificacao listar() e remover()
-		if ((inicio + fim) != 0 && inicio == fim)			//Se a lista nao esta na posicao inicia e incio e fim ocupam o mesmo indice
-			response = TRUE;								//<- Lista vazia
+	if (opc == 2){						//Sub-rotina de verificacao listar() e remover()
+		if ((inicio + fim) != 0 && inicio == fim)	//Se a lista nao esta na posicao inicia e incio e fim ocupam o mesmo indice
+			response = TRUE;			//<- Lista vazia
 	}
-	if (opc == 3){											//Sub-rotina de verificacao reinicializacao do fim
-		if (fim == size && inicio != 0)						//Se fim alcancou o valor maximo e inicio nao esteja no ponto inicial
-			response = TRUE;								//<- Fim sera reiniciado
+	if (opc == 3){						//Sub-rotina de verificacao reinicializacao do fim
+		if (fim == size && inicio != 0)			//Se fim alcancou o valor maximo e inicio nao esteja no ponto inicial
+			response = TRUE;			//<- Fim sera reiniciado
 	}
 
-	if (opc == 4) {											//sub-rotina de verificacao reinicializacao do inicio
-		if (inicio == size && overlap == TRUE)				//Se inicio alcancou o valor maximo e fim ja tenha sido reinicializado
-			response = TRUE;								//<- Inicio sera reiniciado	
+	if (opc == 4) {						//sub-rotina de verificacao reinicializacao do inicio
+		if (inicio == size && overlap == TRUE)		//Se inicio alcancou o valor maximo e fim ja tenha sido reinicializado
+			response = TRUE;			//<- Inicio sera reiniciado	
 	}
-	return response;										//Retornando response 
+	return response;					//Retornando response 
 }
 
 void inserir(int inicio, int *fim, int fila[], int *overlap) {	//Funcao inserir
