@@ -8,15 +8,15 @@
 
 int verif(int tipo, int topo){				//verif(tipo da verificacao, indice da pilha)
 	int response = FALSE;
-	if(tipo == 1){							//Vetificacao se a pilha esta cheia
-		if(topo < size)						//indice menor que tamanho
-			response = TRUE;				//ainda eh possivel inserir
+	if(tipo == 1){					//Vetificacao se a pilha esta cheia
+		if(topo < size)				//indice menor que tamanho
+			response = TRUE;		//ainda eh possivel inserir
 	}
-	if(tipo == 2){							//Vetificacao se a pilha esta vazia
-		if(topo >= 0)						//indice maior ou igual a 0 
-			response = TRUE;				//ainda eh possivel remover ou listar
+	if(tipo == 2){					//Vetificacao se a pilha esta vazia
+		if(topo >= 0)				//indice maior ou igual a 0 
+			response = TRUE;		//ainda eh possivel remover ou listar
 	}	
-	return response;						//retorno da resposta  
+	return response;				//retorno da resposta  
 }
 
 void inserir(float pilha[], int *topo){
@@ -42,7 +42,7 @@ void remover(float pilha[], int *topo){
 
 void listar(float pilha[], int topo){
 	int i;
-	if(verif(2, topo) == TRUE){				//Vetificacao se a pilha tem conteudo
+	if(verif(2, topo) == TRUE){			//Vetificacao se a pilha tem conteudo
 		for(i = 0;i <= topo;i++){
 		printf("Valor:%g\n", pilha[i]);	
 		}
