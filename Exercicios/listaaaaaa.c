@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,18 +9,14 @@ typedef struct{
 	double preco;	
  }produto;
 
-typedef struct elemento{
+struct elemento{
 	produto data;
 	struct elemento* prev;
-	struct elememto* next;
-}cell;
+	struct elemento* next;
+};
 
-//typedef struct elemento cell;
+typedef struct elemento cell;
 
-void freeP(cell *pointer){
-	pointer = NULL;
-	free(pointer);
-}
 
 cell* init(){
 	return NULL;
@@ -29,37 +24,30 @@ cell* init(){
 
 cell* inserir(cell* lista){
 	char nome[strsize];
-	cell* callback;	
-	int teste;
-	cell* conteudo = (cell*)malloc(sizeof(cell));
+	cell *callback = init();	
+	cell *conteudo = (cell*)malloc(sizeof(cell));
 	do{
 		printf("nome:");
 		gets(nome);
 	}while(strlen(nome)>strsize);
+	strcpy(conteudo->data.nome, nome);	
 	printf("preco:");
 	scanf("%lf", &conteudo->data.preco);
-	strcpy(conteudo->data.nome, nome);	
 	conteudo->prev = lista;
-	printf("%lf      %s     %p\n", conteudo->data.preco, conteudo->data.nome, conteudo->prev);
-	/*if(conteudo->prev != NULL){
+	if(conteudo->prev != NULL){
 		callback = conteudo->prev; 
-		memcpy(callback->next, conteudo, sizeof(cell));
-		//printf("%p", callback->next);
-		freeP(callback);
-	}*/
+		callback->next = conteudo;
+		printf("%lf--%s--%p--%p--%p--%p\n", conteudo->data.preco, conteudo->data.nome, conteudo, conteudo->prev, callback, callback->next);
+	}
+	
 	return conteudo; 
 }	
-	
+
 void menu(){
 	printf("/////////////////////////////////////////\n");
 	printf("|[1] - inserir							|\n");
-	
-	
-	
 }
-	
-	
-	
+
 int main(){
 	cell* lista;
 	int opc;
@@ -73,6 +61,4 @@ int main(){
 			lista = inserir(lista);
 		}
 	}
-	
-
 }
