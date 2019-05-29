@@ -18,30 +18,59 @@ struct elemento{
 typedef struct elemento cell;
 
 
-cell* init(){
+cell* init(){			//retorna NULL
 	return NULL;
 }
 
-cell* inserir(cell* lista){
+cell* insert(cell* lista){
 	char nome[strsize];
-	cell *callback = init();	
-	cell *conteudo = (cell*)malloc(sizeof(cell));
+	cell *callback = init();									//Recebendo NULL
+	cell *conteudo = (cell*)malloc(sizeof(cell));				//Alocando a nova lista
 	do{
-		printf("nome:");
-		gets(nome);
-	}while(strlen(nome)>strsize);
-	strcpy(conteudo->data.nome, nome);	
+		printf("nome:");										
+		gets(conteudo->data.nome);								//capturando o nome
+	}while(strlen(conteudo->data.nome)>strsize);				//recomeca se conteudo 'conteudo->data.nome' for maior que tamanho maximo  	
 	printf("preco:");
-	scanf("%lf", &conteudo->data.preco);
-	conteudo->prev = lista;
-	if(conteudo->prev != NULL){
-		callback = conteudo->prev; 
-		callback->next = conteudo;
-		printf("%lf--%s--%p--%p--%p--%p\n", conteudo->data.preco, conteudo->data.nome, conteudo, conteudo->prev, callback, callback->next);
+	scanf("%lf", &conteudo->data.preco);						//salvando o preco
+	conteudo->prev = lista;										//'conteudo->prev' recebendo o endereco anterior
+	if(conteudo->prev != NULL){									//se 'conteudo->prev' for igual a NULL, entao a lista so tem 1 celula, caso contrario tem mais
+		callback = conteudo->prev; 								//'callback' recebe o endereco do conteudo anterior, e entao...
+		callback->next = conteudo;								//'callback' acessa o next do anterior e salva o endereço da celula atual
 	}
-	
-	return conteudo; 
+	return conteudo;											//retornando celula atual 
 }	
+
+void modif(cell* lista){
+	cell* search;
+	char nome[strsize];
+	do{
+		printf("Nome para a pesquisa:");
+		gets(nome);
+	}while(strlen(nome));
+	search = lista;
+	if(search == NULL){
+		printf("lista vazia");	
+	}
+	else{
+		while(search != NULL){
+			if (nome == search->data.nome){
+				printf("Objeto encontrado!\n\n");
+					do{
+						printf("Nome para a pesquisa:");
+						gets(nome);
+					}while(strlen(nome)>strsize);
+					strcpy(search->data.nome, nome);
+					//search->data.nome = nome;
+					printf("valor:");
+					scanf("%lf", search->data.preco);
+			}
+			else{
+				printf("objeto nao encontrado!\n");
+			}
+			search = lista->prev;
+		}
+	}
+}
 
 void menu(){
 	printf("/////////////////////////////////////////\n");
@@ -58,7 +87,10 @@ int main(){
 		scanf("%d", &opc);
 		getchar();
 		if(opc == 1){
-			lista = inserir(lista);
+			lista = insert(lista);
+		}
+		if(opc == 2){
+			modif(lista);
 		}
 	}
 }
