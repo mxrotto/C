@@ -89,29 +89,48 @@ void modif(cell* lista){
 		printf("Valor nao encontrado\n");
 }
 
-void removeCell(cell* lista){
-	cell* operator;
+cell* removeCell(cell* lista){
+	cell* op;
 	cell* back_p, back_n;
-	operator = search(lista);
-	if(operator != NULL){
-		if(operator->prev == NULL && operator->prev == NULL){
-			 
+	op = search(lista);
+	if(op != NULL){
+		if(op->prev == NULL && op->next == NULL){			//Se a lista tiver apenas uma celula	 
+			free(lista);
+			lista = NULL;	
 		}
-	
+		if(op->prev != NULL && op->next == NULL){
+			
+			
+			
+			
+			
+			
+		if(op->prev == NULL && op->next == NULL){			//Se a lista tiver apenas uma celula	 
+			free(lista);
+			lista = NULL;	
+		}
+			
 	}else
 		printf("Valor nao encontrado\n");
-	}
+	return lista;
+}
+	
+	
+void head(){
+	printf("--------------------------------------------\n\n");
+	printf("%-12cCadastro e modificacao\n", ' ');
+	printf("%-16cde produto\n\n", ' ');
+	printf("--------------------------------------------\n\n");
+}
 
 void menu(){
-//	printf("+-------------------------------------------+\n");
-	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("|             Cadastro e modificacao        |\n");
-	printf("|                  de  produto              |\n");
-	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("|\t\t\t[1] - Inserir                   |\n");
-	printf("|\t\t\t[2] - Modificar                 |\n");
-	printf("|\t\t\t[2] - Remover                   |\n");
-
+	head();
+	printf("%-7c[1] - Inserir\n", ' ');
+	printf("%-7c[2] - Modificar\n", ' ');
+	printf("%-7c[3] - Remover\n", ' ');
+	printf("%-7c[4] - Listar produtos\n", ' ');
+	printf("%-7c[5] - Buscar\n", ' ');
+	printf("%-7c[6] - Sair\n\n", ' ');	
 }
 
 int main(){
