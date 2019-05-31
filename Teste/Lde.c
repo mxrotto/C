@@ -18,13 +18,16 @@ struct elemento{
 typedef struct elemento cell;
 
 
-cell* init(){			//retorna NULL
-	return NULL;
+void head(){
+	printf("--------------------------------------------\n\n");
+	printf("%-11cCadastro e modificacao\n", ' ');
+	printf("%-16cde produto\n\n", ' ');
+	printf("--------------------------------------------\n\n");
 }
 
 cell* insert(cell* lista){
 	char nome[strsize];
-	cell *callback = init();									//Recebendo NULL
+	cell *callback = NULL;									//Recebendo NULL
 	cell *conteudo = (cell*)malloc(sizeof(cell));				//Alocando a nova lista
 	do{
 		printf("nome:");										
@@ -42,16 +45,12 @@ cell* insert(cell* lista){
 }
 
 void table(char nome[], double valor){
-	int i = 0;
-	while(i < 1){
-		printf("+-------------------------------------------+\n");
-		i++;
-	}
+	printf("+-------------------------------------------+\n");
 	printf("|Nome:%-20s|Valor:R$%-9lg|\n", nome, valor);
 	printf("+-------------------------------------------+\n");	
 }
 
-cell* search(cell* lista){
+cell* search(cell* lista, int p){
 	cell* search = NULL;
 	cell* reference = NULL;
 	char nome[strsize];
@@ -63,10 +62,14 @@ cell* search(cell* lista){
 		search = lista;			//Ultimo endereco
 		while(search != NULL){
 			if(0 == strcmp(search->data.nome, nome)){
-				printf("Item eqncontrado!\n");
+				system("@cls||clear");
+				head();
+				printf("Item encontrado!\n");
 				table(search->data.nome, search->data.preco);
 				reference = search;
 				search = NULL;
+					if(p == 1)
+					system("pause");
 				break;
 			}
 			search = search->prev;							
@@ -77,7 +80,7 @@ cell* search(cell* lista){
 
 void modif(cell* lista){
 	cell* conteudo;
-	conteudo = search(lista);
+	conteudo = search(lista, 0);
 		if(conteudo != NULL){
 			do{
 				printf("Novo nome:");
@@ -85,43 +88,90 @@ void modif(cell* lista){
 			}while(strlen(conteudo->data.nome)>strsize);	
 			printf("Novo valor:");	
 			scanf("%lf", &conteudo->data.preco);
-		}else
-		printf("Valor nao encontrado\n");
+		}
+		else{
+			printf("Valor nao encontrado\n");
+			system("pause");
+		}
+}
+
+void listar(cell* lista){
+	cell* conteudo;
+	conteudo = lista;
+	if(conteudo != NULL){
+		system("@cls||clear");
+		head();
+		printf("+-------------------------------------------+\n");
+		printf("%-4cLista de produtos\n", ' ');
+		while(conteudo != NULL){
+			table(conteudo->data.nome, conteudo->data.preco);
+			conteudo = conteudo->prev;
+		}	
+	}
+	else{
+		printf("lista vazia\n");
+	}
+	system("pause");
 }
 
 cell* removeCell(cell* lista){
 	cell* op;
-	cell* back_p, back_n;
-	op = search(lista);
+	cell* back_p;
+	cell* back_n;
+	op = search(lista, 0);
 	if(op != NULL){
-		if(op->prev == NULL && op->next == NULL){			//Se a lista tiver apenas uma celula	 
+		if(op->prev == NULL && op->next == NULL){		//apenas um item na lista
 			free(lista);
-			lista = NULL;	
+			printf("Celula deletada.\n");
+			lista = NULL;
 		}
-		if(op->prev != NULL && op->next == NULL){
-			
-			
-			
-			
-			
-			
-		if(op->prev == NULL && op->next == NULL){			//Se a lista tiver apenas uma celula	 
-			free(lista);
-			lista = NULL;	
+		if(op->prev == NULL && op->next != NULL){		//Primeiro
+			back_n = op->next;
+			back_n->prev = NULL;
+			free(op);	
+			printf("Celula deletada.\n");
+		}	
+		if(op->prev != NULL && op->next == NULL){		//Ultimo
+			back_p = op->prev;
+			back_p->next = NULL;
+			free(op);
+			printf("Celula deletada.\n");
+			lista = back_p;		
 		}
-			
+		if(op->prev != NULL && op->next != NULL){		//entre duas ou mais celulas
+			back_p = op->prev;
+			back_n = op->next;
+			back_p->next = back_n;
+			back_n->prev = back_p;
+			free(op);
+			printf("Celula deletada.\n");		
+		}			
 	}else
-		printf("Valor nao encontrado\n");
+		printf("Valor nao encontrado!\n");
+	system("pause");
 	return lista;
 }
-	
-	
-void head(){
-	printf("--------------------------------------------\n\n");
-	printf("%-12cCadastro e modificacao\n", ' ');
-	printf("%-16cde produto\n\n", ' ');
-	printf("--------------------------------------------\n\n");
+
+void sair(cell* lista){
+	cell* dump;
+	char opc;
+	printf("Realmente quer sair? ([s] para sim)\n");
+	scanf("%c", &opc);
+	if(opc == 's' || opc == 'S'){
+		if(lista != NULL){
+			printf("Apagando alocacoes...\n\n");
+			while(lista->prev != NULL){
+				dump = lista;
+				lista = lista->prev;
+				free(dump);	
+			}
+			free(lista);
+		}
+		printf("saindo...\n");
+		exit(EXIT_SUCCESS);
+	}
 }
+	
 
 void menu(){
 	head();
@@ -136,8 +186,9 @@ void menu(){
 int main(){
 	cell* lista;
 	int opc;
-	lista = init();
+	lista = NULL;
 	while(!EXIT_SUCCESS){
+		system("@cls||clear");
 		menu();
 		printf("escolha:");
 		scanf("%d", &opc);
@@ -147,6 +198,15 @@ int main(){
 		if(opc == 2)
 			modif(lista);
 		if(opc == 3)
-			removeCell(lista);		
+			lista = removeCell(lista);	
+		if(opc == 4)
+			listar(lista);	
+		if(opc == 5)
+			search(lista, 1);
+		if(opc == 6)
+			sair(lista);
+		if(opc < 1 || opc > 6){
+			//nada	
+		}
 	}
 }
