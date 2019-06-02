@@ -33,7 +33,7 @@ cell* insert(cell* lista) {
 	} while (strlen(conteudo->data.nome) > strsize);		//recomeca se conteudo 'conteudo->data.nome' for maior que tamanho maximo  	
 	printf("preco:");
 	scanf("%lf", &conteudo->data.preco);				//salvando o preco
-	getchar();												                  //getchar() pra estancar qualquer erro no scanf (nao eh super efetivo)
+	getchar();			                                //getchar() pra estancar qualquer erro no scanf (nao eh super efetivo)
 	conteudo->prev = lista;
 	conteudo->next = NULL;						//'conteudo->prev' recebendo o endereco anterior
 	if (conteudo->prev != NULL) {					//se 'conteudo->prev' for igual a NULL, entao a lista so tem 1 celula, caso contrario tem mais
@@ -63,12 +63,12 @@ cell* search(cell* lista) {						//Procedimento de procura
 		while (search != NULL) {				//Enquanto o ultimo endereco for diferente de NULL				
 			if (0 == strcmp(search->data.nome, nome)) {	//Testando se o nome capturado anteriormente é semelhante a algum ja salvo
 				system("@cls||clear");
-				head();											                  //Cabecalho da "interface"
+				head();				        //Cabecalho da "interface"
 				printf("Item encontrado!\n");
 				table(search->data.nome, search->data.preco);	//Mostrando o item encontrado
 				reference = search;				//'reference' recebe o endereco da celula do item desejado
 				search = NULL;					//E 'search' recebe NULL, pois ja nao ha mais o que procurar
-				break;											                  //Parando o while
+				break;						//Parando o while
 			}
 			search = search->prev;					//Caminhando de tras pra frente nos links
 		}
