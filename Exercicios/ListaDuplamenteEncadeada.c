@@ -79,8 +79,8 @@ cell* search(cell* lista) {						//Procedimento de procura
 	return reference;							//Retornando NULL os se a lista esta vazia ou se a pesquisa nao encontrou resultados 
 }
 
-void procura(cell* lista) {										
-	if (search(lista) == NULL) {
+void procura(cell* lista) {							//Uma funcao so para pesquisa pra que o system("pause")
+	if (search(lista) == NULL) {						//da pesquisa nao atrapalhe outras funcoes 
 		printf("Lista vazia ou item nao encotrado!\n");
 	}
 	system("pause");
