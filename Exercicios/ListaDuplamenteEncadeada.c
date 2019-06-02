@@ -54,10 +54,10 @@ cell* search(cell* lista) {						//Procedimento de procura
 	cell* reference = NULL;						//<- Ponteiros de procura e retorno recebem NULL
 	char nome[strsize];						//Array para a pesquisa
 	if (lista != NULL) {						//Se a lista nao estiver vazia
-		do {													                    //<-
+		do {			                                //<-
 			printf("Nome para a pesquisa:");		//<-
 			scanf("%[^\n]s", &nome);
-			getchar();											                //getchar() pra estancar qualquer erro no scanf
+			getchar();				        //getchar() pra estancar qualquer erro no scanf
 		} while (strlen(nome) > strsize);			//<-Capturando o nome e testando se ele é maior que o tamanh maximo
 		search = lista;						//Ultimo endereco
 		while (search != NULL) {				//Enquanto o ultimo endereco for diferente de NULL				
