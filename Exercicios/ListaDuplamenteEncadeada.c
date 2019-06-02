@@ -3,24 +3,24 @@
 #include <string.h>
 
 
-#define strsize 		20								  //Tamanho maximo do nome
+#define strsize 		20			//Tamanho maximo do nome
 
 
 
-typedef struct {											  //.DATA
-	char nome[strsize];										//Nome do produto
-	double preco;											    //Preco do produto
+typedef struct {					//.DATA
+	char nome[strsize];				//Nome do produto
+	double preco;					//Preco do produto
 }produto;
 
 struct elemento {
-	produto data;											    //.DATA
-	struct elemento* prev;								//Proximo link
-	struct elemento* next;								//Link anterior
+	produto data;					//.DATA
+	struct elemento* prev;				//Proximo link
+	struct elemento* next;				//Link anterior
 };
 
 typedef struct elemento cell;
 
-void head() {												    //Cabecalho da "interface"													
+void head() {						//Cabecalho da "interface"													
 	printf("--------------------------------------------\n\n");
 	printf("%-11cCadastro e modificacao\n", ' ');
 	printf("%-16cde produto\n\n", ' ');
@@ -29,19 +29,19 @@ void head() {												    //Cabecalho da "interface"
 
 cell* insert(cell* lista) {
 	cell *callback = NULL;
-	cell *conteudo = (cell*)malloc(sizeof(cell));			  //Alocando a nova lista
+	cell *conteudo = (cell*)malloc(sizeof(cell));			//Alocando a nova lista
 	do {
 		printf("nome:");
 		scanf("%[^\n]s", &conteudo->data.nome);
 	} while (strlen(conteudo->data.nome) > strsize);		//recomeca se conteudo 'conteudo->data.nome' for maior que tamanho maximo  	
 	printf("preco:");
-	scanf("%lf", &conteudo->data.preco);					      //salvando o preco
+	scanf("%lf", &conteudo->data.preco);				//salvando o preco
 	getchar();												                  //getchar() pra estancar qualquer erro no scanf (nao eh super efetivo)
 	conteudo->prev = lista;
-	conteudo->next = NULL;									            //'conteudo->prev' recebendo o endereco anterior
-	if (conteudo->prev != NULL) {							          //se 'conteudo->prev' for igual a NULL, entao a lista so tem 1 celula, caso contrario tem mais
-		callback = conteudo->prev; 							          //'callback' recebe o endereco do conteudo anterior, e entao...
-		callback->next = conteudo;							          //'callback' acessa o next do anterior e salva o endereço da celula atual
+	conteudo->next = NULL;						//'conteudo->prev' recebendo o endereco anterior
+	if (conteudo->prev != NULL) {					//se 'conteudo->prev' for igual a NULL, entao a lista so tem 1 celula, caso contrario tem mais
+		callback = conteudo->prev; 				//'callback' recebe o endereco do conteudo anterior, e entao...
+		callback->next = conteudo;				//'callback' acessa o next do anterior e salva o endereço da celula atual
 	}
 	return conteudo;										                 //retornando celula atual 
 }
