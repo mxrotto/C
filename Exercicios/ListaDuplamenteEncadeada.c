@@ -2,10 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #define strsize 		20			//Tamanho maximo do nome
-
-
 
 typedef struct {					//.DATA
 	char nome[strsize];				//Nome do produto
