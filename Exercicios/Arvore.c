@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <unistd.h>
 
 #pragma warning(disable:4996)
 
@@ -17,9 +18,12 @@ Tree *criaRaiz() {
 }
 
 void espacamento(int nivel) {
-	int i;
+	int i, j;
+	for(j = nivel - 1;j >=0 ;j--){
+		printf("|");
+	}
 	for (i = 0; i < nivel - 1; i++) {
-		printf("\t");
+		printf("_");
 	}
 }
 
@@ -42,10 +46,9 @@ void imprimir(Tree *r, int nivel) {
 	if (r != NULL) {
 		espacamento(nivel);
 		nivel++;
-		printf(" \\%c\\.. ", r->info);
-		printf("(nivel: %d)\n", nivel - 2);
+		printf(" [%c] Nivel %d\n", r->info, nivel - 2);
 		imprimir(r->Rchild, nivel);
-		imprimir(r->Lchild, nivel);
+		imprimir(r->Lchild, nivel);	
 	}
 }
 
@@ -67,9 +70,8 @@ void freeTree(Tree *r) {
 	}
 }
 
-Tree *insertIntoTree(Tree *root) {
+Tree *insertIntoTree(Tree *root, char keys[]) {
 	int i = 0;
-	char keys[] = { 'D' ,'B' ,'A' ,'C' ,'F' ,'E', 'H', 'L', 'G', 'F', 'K', 'D', 63, 'W', 'Z','\0' };
 	if (root == NULL) {
 		while (keys[i] != '\0') {
 			root = criaArvore(root, keys[i]);
@@ -98,7 +100,7 @@ void checkBuscar(Tree *root) {
 	printf("%-24c[ Buscar ]\n", ' ');
 	printf("- Informe o valor: ");
 	scanf("%c", &letra);
-	fflush(stdin);
+	getchar();
 	buscar(root, letra, spot);
 	if ((*spot) == 1) {
 		printf(" Valor Encontrado: { %c }\n", letra);
@@ -110,14 +112,15 @@ void checkBuscar(Tree *root) {
 	*spot = 0;
 }
 
-void checkImprimir(Tree *root) {
-	system("@cls||clear");
+void checkImprimir(Tree *root, char keys[]) {
 	if (root != NULL) {
+		system("@cls||clear");
 		head();
+		printf("%-19c[%s]\n\n", ' ', keys);
 		imprimir(root, 1);
 	}
 	else {
-		printf("%-21cArvore nao criada!\n", ' ');
+		printf("\n\nArvore nao criada!\n");
 	}
 	system("pause");
 }
@@ -134,15 +137,16 @@ void sair(Tree *root) {
 
 void menu() {
 	head();
-	printf("\n%-8c{1}Criar arvore\n", ' ');
-	printf("%-8c{2}Imprimir arvore\n", ' ');
-	printf("%-8c{3}Buscar na arvore\n", ' ');
-	printf("%-8c{4}Sair\n", ' ');
+	printf("\n%-8c[1]Criar arvore\n", ' ');
+	printf("%-8c[2]Imprimir arvore\n", ' ');
+	printf("%-8c[3]Buscar na arvore\n", ' ');
+	printf("%-8c[4]Sair\n", ' ');
 }
 
 int main() {
 	char opc;
 	Tree *root = criaRaiz();
+	char keys[] = { 'F' ,'E' ,'V','A' ,'T' ,'S', 'C', 'M', 'O', 'L', '\0' };
 	while (!EXIT_SUCCESS) {
 		system("@cls||clear");
 		menu();
@@ -150,9 +154,9 @@ int main() {
 		scanf("%c", &opc);
 		getchar();
 		if (opc == '1')
-			root = insertIntoTree(root);
+			root = insertIntoTree(root, keys);
 		if (opc == '2')
-			checkImprimir(root);
+			checkImprimir(root, keys);
 		if (opc == '3')
 			checkBuscar(root);
 		if (opc == '4')
