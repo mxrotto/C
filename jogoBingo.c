@@ -5,9 +5,6 @@
 #define QTDTAB 6
 #define qtd_num 5
 
-
-#pragma warning(disable:4996)							//Pode apagar, suppress de "erro" do visual studio
-
 typedef struct {
 	int colunas[qtd_num];
 	int linhas[qtd_num];
