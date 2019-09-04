@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define msg "tamanho em bytes do tipo"
+
+int main(){
+	printf("--------------------------------------------\n");
+	printf("%s int: [%d]\n\n", msg, sizeof(int));
+	printf("%s long int: [%d]\n\n", msg, sizeof(long int));
+	printf("%s long long int: [%d]\n\n", msg, sizeof(long long int));
+	printf("%s short int: [%d]\n\n", msg, sizeof(short int));
+	printf("%s float: [%d]\n\n", msg, sizeof(float));
+	printf("%s double: [%d]\n\n", msg, sizeof(double));
+	printf("%s char: [%d]\n\n", msg, sizeof(char));
+	printf("%s bool: [%d]\n\n", msg, sizeof(bool));
+	printf("--------------------------------------------\n");
+}
