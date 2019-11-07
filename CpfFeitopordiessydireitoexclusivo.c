@@ -3,13 +3,12 @@
 #include <string.h>
 #include <stdbool.h>
 
+#define lines "----------------------------------------------------\n"
 #define dirtyCPFs 14	//tamanho do cpf de entrada, com pontos e traco
 #define size 11			//Tamanho do cpf sem pontos e traco
 
-
-
 /*------------------------------------------------------
-			getRealValue():int
+					getRealValue():int
 	Retotna o valor numerico correspondete ao do caracter
 ex:O caracter '1' eh representado como 49 na tabela unicode,
 logo 49 - 48 eh igual a 1 em inteiro, assim com os outros 
@@ -19,7 +18,7 @@ int inline getRealValue(char unicode) { return (unicode - 48);}
 
 
 /*------------------------------------------------------
-			*inputPurifying():char
+					*inputPurifying():char
 	Funcao que "limpa" o cpf de entrada, tira pontos e traco, 
 vetifica o tamanho da string e tambem faz o papel de validar
 o cpf. A funcao tem seu nome com astericos pois retorna um 
@@ -50,7 +49,7 @@ char *inputPurifying(char dirtyCPF[]) {
 
 
 /*------------------------------------------------------
-			vetifCpf():bool
+					vetifCpf():bool
 	Verifica os dois digitos finais do cpf, retorna imeditamente
 FALSE se qualquer um dos dois nao bater com o calculo resultante,
 no final returna TRUE, pois aparentemente o cpf condiz com a
@@ -74,8 +73,47 @@ bool verifCpf(char cpf[]){
 	return true;
 }
 
+void validaCPF() {
+	char inCPF[dirtyCPFs];
+	char CPF[size];
+	printf("Informe seu cpf (c/ pontuacao):");
+	scanf("%[^\n]s", inCPF);
+	if(!(inputPurifying(inCPF) == NULL)){
+		strcpy(CPF, inputPurifying(inCPF));
+		if(verifCpf(CPF)) {
+			printf("CPF valido, significa que esta apta(o) a mandar nudes!\n");
+			system("pause");
+		} else {
+			printf("CPF invalido!\n");
+			system("pause");	
+		}
+	} else {
+		printf("CPF invalido!\n");
+		system("pause");
+	}	
+}
+
+
+void menu() {
+	printf("[1] Validar cpf\n");
+	printf("[2] Ver CPFs validados\n");
+	printf("[3] Sair\n\n");
+	printf("Escolha:");
+}
+
 int main(){
-	char cpf[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '9'};
-	verifCpf(cpf);
-	printf("%s", inputPurifying("123.123.123-12"));
+	int opc;
+	while(!EXIT_SUCCESS){	
+		system("@cls||clear");
+		menu();
+		scanf("%d", &opc);
+		getchar();
+		printf(lines);
+		switch(opc){
+			case 1:
+				validaCPF();
+				break;
+			
+		}
+	}
 }
